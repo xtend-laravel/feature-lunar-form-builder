@@ -2,9 +2,9 @@
 
 namespace XtendLunar\Features\FormBuilder;
 
-use CodeLabX\XtendLaravel\Base\XtendFeatureProvider;
+use Illuminate\Support\ServiceProvider;
 
-class FormBuilderProvider extends XtendFeatureProvider
+class FormBuilderProvider extends ServiceProvider
 {
     /**
      * Extends register service provider
