@@ -2,27 +2,29 @@
 
 namespace XtendLunar\Features\FormBuilder;
 
-use Illuminate\Support\ServiceProvider;
+use CodeLabX\XtendLaravel\Base\XtendFeatureProvider;
+use Livewire\Livewire;
+use XtendLunar\Features\FormBuilder\Livewire\Components\Forms\ChannelForm;
+use XtendLunar\Features\FormBuilder\Livewire\Components\Forms\CustomerDetailForm;
+use XtendLunar\Features\FormBuilder\Livewire\Components\Forms\ProfileForm;
 
-class FormBuilderProvider extends ServiceProvider
+class FormBuilderProvider extends XtendFeatureProvider
 {
-    /**
-     * Extends register service provider
-     *
-     * @return void
-     */
-    public function withRegister(): void
+    public function register()
     {
-        //
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'adminhub');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'adminhub');
     }
 
-    /**
-     * Extends boot service provider
-     *
-     * @return void
-     */
-    public function withBoot(): void
+    public function boot()
     {
-        //
+        $this->registerFormComponents();
+    }
+
+    protected function registerFormComponents(): void
+    {
+        Livewire::component('hub.components.forms.channel-form', ChannelForm::class);
+        Livewire::component('hub.components.forms.customer-detail-form', CustomerDetailForm::class);
+        Livewire::component('hub.components.forms.profile-form', ProfileForm::class);
     }
 }
