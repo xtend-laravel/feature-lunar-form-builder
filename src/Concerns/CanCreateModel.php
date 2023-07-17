@@ -2,17 +2,8 @@
 
 namespace XtendLunar\Features\FormBuilder\Concerns;
 
-use Illuminate\Support\Str;
-
 trait CanCreateModel
 {
-    /**
-     * Defines the confirmation text when deleting a model.
-     *
-     * @var string|null
-     */
-    public $createConfirm = null;
-
     /**
      * Soft creates a brand.
      *
@@ -22,11 +13,14 @@ trait CanCreateModel
     {
         $this->validate();
         $this->model->save();
+    }
 
-        $routeName = Str::of(class_basename($this->model))->plural()->lower();
+    public function notifyCreate(): void
+    {
         $this->notify(
-            __('adminhub::notifications.model.created', ['model' => class_basename($this->model)]),
-            "hub.$routeName.index"
+            message: __('adminhub::notifications.model.created', ['model' => class_basename($this->model)]),
+            route: $this->getRouteName(),
+            routeParams: $this->getRouteParams(),
         );
     }
 }

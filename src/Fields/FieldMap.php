@@ -3,22 +3,13 @@
 namespace XtendLunar\Features\FormBuilder\Fields;
 
 use XtendLunar\Features\FormBuilder\Base\InputField;
+use XtendLunar\Features\FormBuilder\Concerns\CanResolveFromContainer;
 
-class Fileupload extends InputField
+class FieldMap extends InputField
 {
-    /**
-     * Whether or not the input has an error to show.
-     *
-     * @var bool
-     */
-    public bool $error = false;
+    use CanResolveFromContainer;
 
-    /**
-     * Specify any filetypes for validation client side.
-     *
-     * @var array
-     */
-    public $filetypes = [];
+    public array $fieldMap = [];
 
     /**
      * Initialise the component.
@@ -31,6 +22,16 @@ class Fileupload extends InputField
 
         $this->error = $error;
         $this->filetypes = $filetypes;
+
+        $this->modelName = $name;
+        $this->name = $name;
+    }
+
+    public function fieldMap(array $fieldMap): static
+    {
+        $this->fieldMap = $fieldMap;
+
+        return $this;
     }
 
     /**
@@ -40,6 +41,6 @@ class Fileupload extends InputField
      */
     public function render()
     {
-        return view('adminhub::components.input.fileupload');
+        return view('adminhub::components.input.field-map');
     }
 }

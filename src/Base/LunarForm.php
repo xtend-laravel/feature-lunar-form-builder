@@ -4,6 +4,8 @@ namespace XtendLunar\Features\FormBuilder\Base;
 
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Lunar\Hub\Http\Livewire\Traits\Notifies;
 use Lunar\Hub\Http\Livewire\Traits\WithLanguages;
 use XtendLunar\Features\FormBuilder\Concerns;
 
@@ -15,6 +17,8 @@ abstract class LunarForm extends Component
     use Concerns\CanUpdateModel;
     use Concerns\CanDeleteModel;
     use Concerns\HasRules;
+    use Notifies;
+    use WithFileUploads;
     use WithLanguages;
 
     protected string $layout = 'default';

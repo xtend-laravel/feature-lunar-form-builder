@@ -2,6 +2,7 @@
 
 namespace XtendLunar\Features\FormBuilder\Fields;
 
+use Closure;
 use XtendLunar\Features\FormBuilder\Base\InputField;
 
 class Select extends InputField
@@ -21,6 +22,20 @@ class Select extends InputField
     public array $options = [];
 
     /**
+     * The relationship for the select.
+     *
+     * @var string
+     */
+    public string $relationship = '';
+
+    /**
+     * Whether or not the select is multiple.
+     *
+     * @var bool
+     */
+    public bool $multiple = false;
+
+    /**
      * Initialise the component.
      *
      * @param  bool  $error
@@ -35,6 +50,20 @@ class Select extends InputField
     public function options(array $options, bool $relationship = false): static
     {
         $this->options = $options;
+
+        return $this;
+    }
+
+    public function relationship(string $relationship): static
+    {
+        $this->relationship = $relationship;
+
+        return $this;
+    }
+
+    public function multiple(bool $multiple = true): static
+    {
+        $this->multiple = $multiple;
 
         return $this;
     }

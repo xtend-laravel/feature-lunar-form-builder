@@ -9,13 +9,6 @@ trait CanUpdateModel
 {
     use Notifies;
 
-    /**
-     * Defines the confirmation text when deleting a model.
-     *
-     * @var string|null
-     */
-    public $updateConfirm = null;
-
     public function getMediaModel(): Model
     {
         return $this->model;
@@ -26,11 +19,6 @@ trait CanUpdateModel
         return $this->model;
     }
 
-    /**
-     * Soft updates a brand.
-     *
-     * @return void
-     */
     public function update()
     {
         $this->validate();
@@ -43,7 +31,10 @@ trait CanUpdateModel
         if ($this->model->isRelation('urls')) {
             $this->saveUrls();
         }
+    }
 
+    public function notifyUpdate(): void
+    {
         $this->notify(
             message: __('adminhub::notifications.model.updated', ['model' => class_basename($this->model)]),
             route: $this->getRouteName(),

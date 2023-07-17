@@ -37,19 +37,21 @@ trait HasForms
      * Trigger form component.
      *
      * @param  string  $handle
+     * @param  \Illuminate\Database\Eloquent\Model|null  $model
      * @param  string  $uiComponent
      * @param  array  $settings
      * @return void
      */
     public function triggerForm(
         string $handle,
+        $model = null,
         string $uiComponent = 'modal',
         array $settings = []
     ): void {
         $formProperties = [
             'show' => true,
             'handle' => $handle,
-            'model' => $this->getModelFromHandle($handle),
+            'model' => $model ?? $this->getModelFromHandle($handle),
             'component' => 'hub.components.forms.'.$handle,
             'settings' => $settings,
         ];
